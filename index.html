@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    canvas{
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<canvas id="myCanvas" width="1000px" height="600px" style="border: solid 1px red"></canvas>
+<script>
+  class Circle {
+    x;
+    y;
+    radius;
+    constructor(x, y, radius) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+    }
+    getRanDomHex(){
+      return Math.floor(Math.random()*255);
+    }
+    getRandomColor(){
+      let red = this.getRanDomHex();
+      let green = this.getRanDomHex();
+      let blue = this.getRanDomHex();
+      return "rgb(" + red + "," + blue + "," + green +")";
+    }
+
+    drawCircle(ctx, canvas){
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      ctx.beginPath();
+      this.radius = Math.floor(Math.random()*80)
+      ctx.fillStyle = this.getRandomColor();
+      ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+  let canvas = document.getElementById('myCanvas');
+  console.log('width canvas ===> ', canvas.width)
+  console.log('height canvas ===>', canvas.height)
+  let ctx = canvas.getContext('2d');
+  // let radius = Math.floor(Math.random()*80)
+  // let circle1 = new Circle()
+  // circle1.drawCircle(ctx, canvas)
+  // let circle2 = new Circle();
+  // circle2.drawCircle(ctx, canvas)
+  for (let i = 0; i < 10000; i++) {
+    let circle = new Circle();
+    circle.drawCircle(ctx,canvas)
+  }
+</script>
+</body>
+</html>
